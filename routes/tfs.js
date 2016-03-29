@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -6,8 +7,6 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    console.log(req);
-
     // var token = req.body.token;
     // var team_id = req.body.token;
     // var team_domain = req.body.team_domain;
@@ -24,7 +23,18 @@ router.post('/', function(req, res) {
         text: 'hello world'
     };
 
-    res.json(result);
+    var options = {
+      uri: req.body.response_url,
+      method: 'POST',
+      json: result
+    };
+
+    request(options);
+    res.send('');
 });
+
+function postData(url, string) {
+
+}
 
 module.exports = router;
